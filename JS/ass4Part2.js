@@ -1,44 +1,48 @@
+// Select DOM elements
+const displayedImage = document.querySelector('.displayed-img');
+const thumbBar = document.querySelector('.thumb-bar');
+const btn = document.querySelector('button');
+const overlay = document.querySelector('.overlay');
 
+/* Declaring the array of image filenames */
+const images = ["../images/pic1.jpg", "../images/pic2.jpg", "../images/pic3.jpg", "../images/pic4.jpg", "../images/pic5.jpg"];
 
-// Declaring the Constants for the image filenames
-const images = ['pic1.jpg', 'pic2.jpg', 'pic3.jpg', 'pic4.jpg', 'pic5.jpg',]
+/* Declaring the alternative text for each image file */
 const altText = {
-    'pic1.jpg' : 'Picture of Eye',
-    'pic2.jpg' : 'Picture of a wavy rock',
-    'pic1.jpg' : 'Purple and white plants',
-    'pic1.jpg' : ' Egyption Wall Art',
-    'pic1.jpg' :  'Picture of a moth on a leaf'
-}
+    "../images/pic1.jpg": 'Picture of Eye',
+    "../images/pic2.jpg": 'Picture of a wavy rock',
+    "../images/pic3.jpg": 'Purple and white plants',
+    "../images/pic4.jpg": 'Egyptian Wall Art',
+    "../images/pic5.jpg": 'Picture of a moth on a leaf'
+};
 
-const imageDisplayed = document.querySelector('.displayed-img');
-const thumBar = document.querySelector('.overlay');
+/* Looping through images */
+images.forEach(image => {
+    const newImage = document.createElement('img'); // Create a new img element
+    newImage.setAttribute('src', `../images/${image}`); // Set the src to the image file
+    newImage.setAttribute('alt', altText[image]); // Set the alt text to the corresponding value
+    thumbBar.appendChild(newImage); // Append the new image to the thumb-bar
+});
 
+/* Adding a click event listener to each thumbnail image */
+thumbBar.addEventListener('click', (event) => {
+    if (event.target.tagName === 'IMG') {  // Ensure the clicked element is an image
+        displayedImage.src = event.target.src;  // Set the large image to the clicked thumbnail
+        displayedImage.alt = event.target.alt;  // Set the alt text for the large image
+    }
+});
 
-
-// 2. Loop used for cycling through the images
-for (const images of images) {
-    const newImage = document.createElement('img');
-    newImage.setAttribute('src', 'images/${image}');
-    newImage.setAttribute('alt', alt[image]);
-    thumBar.appendChild(newImage);
-    newImage.addEventListener('click', t => {
-        imageDisplayed.src = t.target.src;
-        imageDisplayed.alt = t.target.alt;
-    });
-    
-}
-
-
-// 3. Adding a button to allow user to switch between light and dark mode
-BigInt.addEventListener('click', () => {
-    const darkMode = darkMode.getattribute('class');
-    if(darkMode === 'dark') {
-        darkMode.setAttribute('class', 'light');
-        darkMode.textContent = 'lighten';
-        overlay.style.backgroundcolor = 'rgba(0,0,0,0.5)';
+/* Wiring up the Darken/Lighten button */
+btn.addEventListener('click', () => {
+    if (btn.classList.contains('dark')) {
+        btn.classList.remove('dark');
+        btn.classList.add('light');
+        btn.textContent = 'Lighten'; // Change button text
+        overlay.style.backgroundColor = 'rgb(0 0 0 / 50%)'; // Apply dark overlay
     } else {
-        darkMode.setAttribute('class', 'dark');
-        darkMode.textContent = 'darken';
-        overlay.style.backgroundcolor = 'rgba(0,0,0,0)';
+        btn.classList.remove('light');
+        btn.classList.add('dark');
+        btn.textContent = 'Darken'; // Change button text
+        overlay.style.backgroundColor = 'rgb(0 0 0 / 0%)'; // Remove overlay
     }
 });
