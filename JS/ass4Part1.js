@@ -1,3 +1,5 @@
+
+
 // 1. COMPLETE VARIABLE AND FUNCTION DEFINITIONS
 
 const customName = document.getElementById('customname');
@@ -9,61 +11,45 @@ function randomValueFromArray(array){
   return array[random];
 }
 
-let storyText = 'It was 94 fahrenheit outside, so ${weightInStones} went for a walk. When they got to :inserty:, they stared in horror for a few moments, then :insertz:. Bob saw the whole thing, but was not surprised — ${weightInStones} weighs 300 pounds, and it was a hot day.'
+const storyText = 'It was 94 fahrenheit outside, so :insertx: went for a walk. When they got to :inserty:, they stared in horror for a few moments, then :insertz:. Bob saw the whole thing, but was not surprised — :insertx: weighs 300 pounds, and it was a hot day.';
+const insertX = ['Willy the Goblin', 'Big Daddy', 'Father Christmas'];
+const insertY = ['the soup kitchen', 'Disneyland', 'the White House'];
+const insertZ = ['spontaneously combusted', 'melted into a puddle on the sidewalk', 'turned into a slug and crawled away'];
 
-let newStory = storyText
-
-let xItem = randomValueFromArray(insertXArray);
-let yItem = randomValueFromArray(insertYArray);
-let zItem = randomValueFromArray(insertZArray);
-
-function replaceStory(){
-    storyText = storyText.replace(':insertX:', xItem)
-                storyText.replace(':insertY:', yItem)
-                storyText.replace(':insertZ:', zItem);
-    
-    console.log(storyText);
-}
-// 2. Raw Text Strings
-
-function insertXArray(array){
-    'Willy the Goblin', 'Big Daddy', 'Father Christmas'
-}
-
-function insertYArray(array){
-    'the soup kitchen', 'Disneyland', 'the White House'
-
-}
-
-function insertZArray(array){
-    'spontaneously combusted', 'melted into a puddle on the sidewalk', 'turned into a slug and crawled away'
-
-
-}
 
 // 3. EVENT LISTENER AND PARTIAL FUNCTION DEFINITION
 
 randomize.addEventListener('click', result);
 
 function result() {
+  // variable used to store the altered story text
+  let storyReplacement = storyText;
+  
+  // constants for random array values
+  const xItem = randomValueFromArray(insertX)
+  const yItem = randomValueFromArray(insertY)
+  const zItem = randomValueFromArray(insertZ)
 
+  storyReplacement = storyReplacement.replaceAll(':insertx:', xItem)
+  storyReplacement = storyReplacement.replaceAll(':inserty:', yItem)
+  storyReplacement = storyReplacement.replaceAll(':insertz:', zItem)
+  
+  
   if(customName.value !== '') {
     const name = customName.value;
-    
-
+    storyReplacement = storyReplacement.replace("Bob", name)    
   }
 
   if(document.getElementById("uk").checked) {
-    const weight = Math.round(300 / 14) + ' stone';
-    const temperature =  Math.round((94 - 32) / 1.8);
-
-    console.log('Weight: ' + weightInStones);
-    console.log('Temperature: ' + temperatureInCelsius + ' centigrade');
-
+    const weightInStones = Math.round(300*0.0714286) + ' stone';
+    const temperature =  Math.round((94 - 32)* 5 / 9) + ' centigrade';
+    storyReplacement = storyReplacement.replace('94 fahrenheit', temperature);
+    storyReplacement = storyReplacement.replace('300 pounds', weightInStones);
   }
 
-  story.textContent = newStory ;
+
+  story.textContent = storyReplacement;
   story.style.visibility = 'visible';
 }
-replaceStory();
+
 
