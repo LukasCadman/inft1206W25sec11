@@ -1,3 +1,10 @@
+/*
+Name: Lukas Cadman
+Student Number: 100880949
+Date: April 10th, 2025
+Description: This is the Java Script file for Assignment 5, where I will be correcting mistakes and added accessibility options to the web page.
+*/
+
 // functionality for showing/hiding the comments section
 
 const showHideBtn = document.querySelector('.show-hide');
