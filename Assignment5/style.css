@@ -148,14 +148,21 @@ article {
 
 main {
   display: flex;
+  gap: 20px;
 }
 
 article {
   flex: 5;
+  background-color: white;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .secondary {
   flex: 2;
+  background-color: white;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 footer {
